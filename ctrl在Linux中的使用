@@ -1,0 +1,10 @@
+ctrl t 把光标前的字符向后移动
+ctrl h 等于backspace
+ctrl b 等于<-
+ctrl f 等于->
+ctrl a 把光标置于首位
+ctrl e 把光标置于末尾
+ctrl u 删除光标前面的所有字符
+ctrl k 删除光标后面的所有字符
+ctrl r 搜索之前用过的命令
+ctrl l 换行
