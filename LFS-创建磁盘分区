@@ -1,0 +1,24 @@
+1.查看磁盘信息，确认要操作的磁盘  sudo fdisk -l  会有以下信息：
+  Disk /dev/sda: 100 GiB
+  Sector size (logical/physical): 512 bytes / 512 bytes
+  I/O size (minimum/optimal): 512 bytes / 512 bytes
+  Disklabel type: gpt
+确认要操作的磁盘，例如：/dev/sda
+
+2.打开磁盘  sudo fdisk /dev/sda  进入后会有提示符  Command (m for help): 
+命令  n  创建新分区，接下来会依次提示：
+  选择分区类型：p=主分区，e=扩展分区
+  分区号：默认是下一个未用的分区
+  起始扇区：直接回车，自动选择第一个可以扇区
+  结束扇区/分区大小：可以输入一个具体值，比如：  +2G  创建一个2GB的分区，  +500M  创建一个500MB的分区，直接回车，占满剩余空间
+
+3.确认分区表
+  输入  p  会看到类似：
+      Device     Start       End   Sectors  Size Type
+      /dev/sda1   2048   2099199   2097152    1G Linux filesystem
+      /dev/sda2 2099200 4196351   2097152    1G Linux filesystem
+
+4.保存退出
+  输入  w  把分区表写入磁盘，然后退出;
+  输入  q  不保存，直接退出；
+
