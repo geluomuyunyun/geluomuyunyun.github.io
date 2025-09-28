@@ -1,0 +1,38 @@
+	重定向符  >  和  <  本质上是写入和读取模式
+	例如：
+		echo hello > file
+	本质上是:
+		exec 1>file	把file和文件描述符1也就是标准输出连起来
+		echo hello	输出hello到标准输出，也就输出到了file
+		exec 1>&-	解除file和标准输出的绑定
+
+	>	  重定向标准输出
+	2>	重定向标准错误
+	&>	重定向stdout和stderr到文件
+	&	  在重定向里表示引用文件描述符而非文件名
+  例如：command >&2
+
+文件描述符：
+stdin（0）：程序从这里读输入
+stdout（1）：程序正常输出内容
+stderr（2）：程序错误或提示信息
+
+用户可以自己创建文件描述符和文件相连： [i]<>filename
+
+例：
+  # 用 FD3 读写方式打开 test.txt，如果没有就新建
+  exec 3<> test.txt
+
+  # 往 FD3 写一行
+  echo "hello" >&3
+
+  # 把 FD3 的读位置移到文件开头
+  exec 3<&-
+
+  exec 3<> test.txt
+  # 从 FD3 读一行
+  read line <&3
+  echo "读到的内容: $line"
+
+  # 最后关闭 FD3
+  exec 3>&-
